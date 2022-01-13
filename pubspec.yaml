@@ -1,0 +1,21 @@
+name: watermark
+description: Implement global or partial page watermarking
+version: 0.0.1
+email: allyju@163.com
+homepage: https://github.com/Monika-LeeAn/watermark.git
+
+environment:
+  sdk: ">=2.16.0-80.1.beta <3.0.0"
+  flutter: ">=2.5.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+
