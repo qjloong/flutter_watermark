@@ -4,8 +4,16 @@ A pure flutter watermark library
 
 Implement global or partial page watermarking
 
-
 Flutter 纯dart 实现全局及部分页面的水印
+
+##### 先上截图
+
+
+| 单个页面的水印     |  自定义水印内容    |  全局水印    |
+| ---- | ---- | ---- |
+|  ![单个页面的水印](/screen/asecond_page.png)    |  ![自定义水印内容](/screen/athird_widget.png)    |  ![全局水印](/screen/global_page.png)    |
+
+
 
 #### 全局水印
 
