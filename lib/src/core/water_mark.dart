@@ -43,24 +43,15 @@ WaterMarkFuture showWaterMark(
   textAlign ??= theme.textAlign;
   backgroundColor ??= theme.backgroundColor;
   radius ??= theme.radius;
-  textDirection ??= theme.textDirection;
 
-  final Widget widget = Directionality(
-    textDirection: textDirection,
-    child: SizedBox(
-      width: double.infinity,
-      height: double.infinity,
-      child: Column(
-        children: buildMarkList(msg,
-            rowCount: rowCount,
-            columnCount: columnCount,
-            textAlign: textAlign,
-            textStyle: textStyle),
-      ),
-    ),
-  );
+  final List<Widget> widget = buildMarkList(msg,
+      rowCount: rowCount,
+      columnCount: columnCount,
+      textAlign: textAlign,
+      textStyle: textStyle);
   return showWaterMarkWidget(
     widget,
+    isShowMsg: true,
     context: context,
     onDismiss: onDismiss,
     dismissOtherMark: dismissOtherMark,
@@ -70,24 +61,46 @@ WaterMarkFuture showWaterMark(
 
 /// Show [widget] with wartermark.
 WaterMarkFuture showWaterMarkWidget(
-  Widget widget, {
+  dynamic widget, {
+  bool isShowMsg = false,
+  bool isCustom = false,
   BuildContext? context,
   VoidCallback? onDismiss,
   bool? dismissOtherMark,
   TextDirection? textDirection,
   bool? handleTouch,
+  int? columnCount = 3,
+  int? rowCount = 5,
 }) {
   if (context == null) {
     _throwIfNoContext(_contextMap.values, 'showWatermarkWidget');
   }
   context ??= _contextMap.values.first;
   final _WaterMarkTheme theme = _WaterMarkTheme.of(context);
+  TextDirection direction = textDirection ?? theme.textDirection;
 
   handleTouch ??= theme.handleTouch;
   final OverlayEntry entry = OverlayEntry(builder: (BuildContext ctx) {
     return IgnorePointer(
       ignoring: !handleTouch!,
-      child: widget,
+      child: isCustom
+          ? widget
+          : Directionality(
+              textDirection: direction,
+              child: SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: Column(
+                  children: isShowMsg
+                      ? widget as List<Widget>
+                      : buildMarkListWidget(
+                          widget,
+                          rowCount: rowCount,
+                          columnCount: columnCount,
+                        ),
+                ),
+              ),
+            ),
     );
   });
 
@@ -119,6 +132,24 @@ WaterMarkFuture showWaterMarkWidget(
   }
 
   return future;
+}
+
+/// Show custom [widget] with wartermark.
+WaterMarkFuture showWaterMarkCustom(
+  Widget widget, {
+  BuildContext? context,
+  VoidCallback? onDismiss,
+  bool? dismissOtherMark,
+  bool? handleTouch,
+}) {
+  return showWaterMarkWidget(
+    widget,
+    isShowMsg: true,
+    isCustom: true,
+    context: context,
+    onDismiss: onDismiss,
+    dismissOtherMark: dismissOtherMark,
+  );
 }
 
 void dismissAllMark({bool showAnim = false}) {

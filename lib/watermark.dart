@@ -5,6 +5,7 @@ export 'src/core/water_mark.dart'
     show
         showWaterMark,
         showWaterMarkWidget,
+        showWaterMarkCustom,
         WaterMark,
         WaterMarkFuture,
         dismissAllMark;

@@ -11,6 +11,7 @@ Flutter 纯dart 实现全局及部分页面的水印
 
 > 思路来源 Toast
 > 本着不愿意重复造轮子的原则，本项目中代码大部分代码来源于 [flutter_oktoast](https://github.com/OpenFlutter/flutter_oktoast) ，实现过程对非必要内容作了删减。
+> 基本上 `toast` 有啥，全局的水印都有。没有的（可能删减过程中弄没了）可以 `fork` 了自己造。
 >
 > 原理其实很简单，就是在 app 上使用 `Overlay` -> `OverlayEntry` 画了个蒙层。
 >

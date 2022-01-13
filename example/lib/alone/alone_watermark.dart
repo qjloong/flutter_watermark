@@ -5,7 +5,7 @@ import 'package:watermark_example/global/second_page.dart';
 import 'package:watermark_example/main.dart';
 
 class AloneApp extends StatelessWidget {
-  AloneApp({Key? key}) : super(key: key);
+  const AloneApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class AloneApp extends StatelessWidget {
       routes: {
         '/second': (context) => const SecondPage(),
       },
-      home: AloneHome(),
+      home: const AloneHome(),
     );
   }
 }

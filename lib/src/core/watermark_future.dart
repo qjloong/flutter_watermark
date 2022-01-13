@@ -32,7 +32,7 @@ class WaterMarkFuture {
 
   void _removeEntry() {
     _entry.removeListener(_mountedListener);
-    if (_isEntryInserted) {
+    if (_isEntryInserted && !_dismissed) {
       _entry.remove();
     }
   }

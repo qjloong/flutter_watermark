@@ -9,9 +9,7 @@ dynamic future;
 class GlobalApp extends StatelessWidget {
   GlobalApp({Key? key}) : super(key: key) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      future = showWaterMark(
-        "global\n全局页面的水印",
-      );
+      future = showWaterMark("global\n全局页面的水印");
     });
   }
 
@@ -105,6 +103,14 @@ class _GlobalHomeState extends State<GlobalHome> {
                   padding: EdgeInsets.all(8.0),
                   child: Text("点我返回起始点"),
                 )),
+            TextButton(
+                onPressed: () {
+                  dismissAllMark();
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text("点我关闭全部水印"),
+                )),
           ],
         ),
       ),
@@ -113,9 +119,7 @@ class _GlobalHomeState extends State<GlobalHome> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     print("=====dispose===========");
-
     future.dismiss();
     future = null;
     super.dispose();

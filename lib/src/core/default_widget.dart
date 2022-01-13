@@ -1,5 +1,18 @@
 part of 'water_mark.dart';
 
+List<Widget> buildMarkListWidget(widget,
+    {rowCount, columnCount, textAlign, textStyle}) {
+  List<Widget> list = [];
+  for (var i = 0; i < rowCount; i++) {
+    Widget child = Expanded(
+        child: Row(
+      children: buildItem(widget: widget, columnCount: columnCount),
+    ));
+    list.add(child);
+  }
+  return list;
+}
+
 /// 原方法来源
 /// @description: water mark can used in page for security .
 /// @author: weichunsheng@jd.com
@@ -12,10 +25,13 @@ part of 'water_mark.dart';
 List<Widget> buildMarkList(msg, {rowCount, columnCount, textAlign, textStyle}) {
   List<Widget> list = [];
   for (var i = 0; i < rowCount; i++) {
-    final widget = Expanded(
+    Widget widget = Expanded(
         child: Row(
-      children: buildItem(msg,
-          columnCount: columnCount, textAlign: textAlign, textStyle: textStyle),
+      children: buildItem(
+          text: msg,
+          columnCount: columnCount,
+          textAlign: textAlign,
+          textStyle: textStyle),
     ));
     list.add(widget);
   }
@@ -30,20 +46,22 @@ List<Widget> buildMarkList(msg, {rowCount, columnCount, textAlign, textStyle}) {
 /// @from: https://github.com/wei-spring/water_mark
 /// @bloc:https://www.cnblogs.com/spring87/p/13597775.html
 ///
-List<Widget> buildItem(text,
-    {textAlign = TextAlign.center, columnCount, textStyle}) {
+List<Widget> buildItem(
+    {text, widget, textAlign = TextAlign.center, columnCount, textStyle}) {
   List<Widget> list = [];
   for (var i = 0; i < columnCount; i++) {
-    final widget = Expanded(
+    Widget child = Expanded(
       child: Center(
         child: MeasureSize(
           child: Transform.rotate(
             angle: -pi / 12,
-            child: Text(
-              text,
-              textAlign: textAlign,
-              style: textStyle,
-            ),
+            child: text != null
+                ? Text(
+                    text,
+                    textAlign: textAlign,
+                    style: textStyle,
+                  )
+                : widget ?? const SizedBox(),
           ),
           onChange: (size) {
             //if (screenSize != null && size != null) {
@@ -59,7 +77,7 @@ List<Widget> buildItem(text,
         ),
       ),
     );
-    list.add(widget);
+    list.add(child);
   }
   return list;
 }

@@ -48,6 +48,26 @@ mixin WaterMarkMixin<T extends StatefulWidget> on State<T> {
         : child;
   }
 
+  Widget drawWidget({
+    required Widget child,
+    Widget? widget,
+  }) {
+    return widget != null
+        ? Stack(children: [
+            child,
+            Positioned(
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              child: IgnorePointer(
+                child: widget,
+              ),
+            ),
+          ])
+        : child;
+  }
+
   /// 原方法来源
   /// @description: water mark can used in page for security .
   /// @author: weichunsheng@jd.com
