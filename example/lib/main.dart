@@ -58,8 +58,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) {
                     //指定跳转的页面
-                    return AloneApp(
-                      key: const Key("alone"),
+                    return const AloneApp(
+                      key: Key("alone"),
                     );
                   },
                 ));

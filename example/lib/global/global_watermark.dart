@@ -119,7 +119,6 @@ class _GlobalHomeState extends State<GlobalHome> {
 
   @override
   void dispose() {
-    print("=====dispose===========");
     future.dismiss();
     future = null;
     super.dispose();
