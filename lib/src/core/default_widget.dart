@@ -1,12 +1,13 @@
 part of 'water_mark.dart';
 
 List<Widget> buildMarkListWidget(widget,
-    {rowCount, columnCount, textAlign, textStyle}) {
+    {rowCount, columnCount, textAlign, textStyle, angle}) {
   List<Widget> list = [];
   for (var i = 0; i < rowCount; i++) {
     Widget child = Expanded(
         child: Row(
-      children: buildItem(widget: widget, columnCount: columnCount),
+      children:
+          buildItem(widget: widget, columnCount: columnCount, angle: angle),
     ));
     list.add(child);
   }
@@ -22,16 +23,20 @@ List<Widget> buildMarkListWidget(widget,
 /// @bloc:https://www.cnblogs.com/spring87/p/13597775.html
 ///
 ///
-List<Widget> buildMarkList(msg, {rowCount, columnCount, textAlign, textStyle}) {
+List<Widget> buildMarkList(msg,
+    {rowCount, columnCount, textAlign, textStyle, angle}) {
   List<Widget> list = [];
   for (var i = 0; i < rowCount; i++) {
     Widget widget = Expanded(
         child: Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: buildItem(
           text: msg,
           columnCount: columnCount,
           textAlign: textAlign,
-          textStyle: textStyle),
+          textStyle: textStyle,
+          angle: angle),
     ));
     list.add(widget);
   }
@@ -47,20 +52,21 @@ List<Widget> buildMarkList(msg, {rowCount, columnCount, textAlign, textStyle}) {
 /// @bloc:https://www.cnblogs.com/spring87/p/13597775.html
 ///
 List<Widget> buildItem(
-    {text, widget, textAlign = TextAlign.center, columnCount, textStyle}) {
+    {text,
+    widget,
+    textAlign = TextAlign.center,
+    columnCount,
+    textStyle,
+    angle}) {
   List<Widget> list = [];
   for (var i = 0; i < columnCount; i++) {
     Widget child = Expanded(
       child: Center(
         child: MeasureSize(
           child: Transform.rotate(
-            angle: -pi / 12,
+            angle: angle ?? (-pi / 12),
             child: text != null
-                ? Text(
-                    text,
-                    textAlign: textAlign,
-                    style: textStyle,
-                  )
+                ? Text(text, textAlign: textAlign, style: textStyle)
                 : widget ?? const SizedBox(),
           ),
           onChange: (size) {

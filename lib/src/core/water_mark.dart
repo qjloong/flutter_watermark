@@ -25,13 +25,13 @@ WaterMarkFuture showWaterMark(
   TextAlign? textAlign = TextAlign.center,
   EdgeInsetsGeometry? textPadding,
   Color? backgroundColor,
-  double? radius,
   VoidCallback? onDismiss,
   TextDirection? textDirection,
   bool? dismissOtherMark,
   BoxConstraints? constraints,
   int? columnCount = 3,
   int? rowCount = 5,
+  double? angle,
 }) {
   if (context == null) {
     _throwIfNoContext(_contextMap.values, 'showWatermark');
@@ -42,13 +42,13 @@ WaterMarkFuture showWaterMark(
   textStyle ??= theme.textStyle;
   textAlign ??= theme.textAlign;
   backgroundColor ??= theme.backgroundColor;
-  radius ??= theme.radius;
 
   final List<Widget> widget = buildMarkList(msg,
       rowCount: rowCount,
       columnCount: columnCount,
       textAlign: textAlign,
-      textStyle: textStyle);
+      textStyle: textStyle,
+      angle: angle);
   return showWaterMarkWidget(
     widget,
     isShowMsg: true,
@@ -71,6 +71,7 @@ WaterMarkFuture showWaterMarkWidget(
   bool? handleTouch,
   int? columnCount = 3,
   int? rowCount = 5,
+  double? angle,
 }) {
   if (context == null) {
     _throwIfNoContext(_contextMap.values, 'showWatermarkWidget');
@@ -97,6 +98,7 @@ WaterMarkFuture showWaterMarkWidget(
                           widget,
                           rowCount: rowCount,
                           columnCount: columnCount,
+                          angle: angle,
                         ),
                 ),
               ),

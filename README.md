@@ -24,8 +24,16 @@ Flutter 纯dart 实现全局及部分页面的水印
 > 原理其实很简单，就是在 app 上使用 `Overlay` -> `OverlayEntry` 画了个蒙层。
 >
 > 默认使用包裹 `MaterialApp` 或 `CupertinoApp` 的方式，不包裹的方式见以下 `example`。
+> 
+```dart
+在pubspec.yaml中添加：
+wartermark:
+    git:
+      url: "https://github.com/Monika-LeeAn/watermark.git"
+```
 
 ```dart
+
 // example
 
 //lib/global/global_watermark.dart
