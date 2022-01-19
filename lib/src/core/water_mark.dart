@@ -32,6 +32,7 @@ WaterMarkFuture showWaterMark(
   int? columnCount = 3,
   int? rowCount = 5,
   double? angle,
+  bool softWrap = false,
 }) {
   if (context == null) {
     _throwIfNoContext(_contextMap.values, 'showWatermark');
@@ -48,7 +49,8 @@ WaterMarkFuture showWaterMark(
       columnCount: columnCount,
       textAlign: textAlign,
       textStyle: textStyle,
-      angle: angle);
+      angle: angle,
+      softWrap: softWrap);
   return showWaterMarkWidget(
     widget,
     isShowMsg: true,

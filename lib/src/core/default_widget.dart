@@ -24,7 +24,7 @@ List<Widget> buildMarkListWidget(widget,
 ///
 ///
 List<Widget> buildMarkList(msg,
-    {rowCount, columnCount, textAlign, textStyle, angle}) {
+    {rowCount, columnCount, textAlign, textStyle, angle, softWrap}) {
   List<Widget> list = [];
   for (var i = 0; i < rowCount; i++) {
     Widget widget = Expanded(
@@ -36,7 +36,8 @@ List<Widget> buildMarkList(msg,
           columnCount: columnCount,
           textAlign: textAlign,
           textStyle: textStyle,
-          angle: angle),
+          angle: angle,
+          softWrap: softWrap),
     ));
     list.add(widget);
   }
@@ -57,7 +58,8 @@ List<Widget> buildItem(
     textAlign = TextAlign.center,
     columnCount,
     textStyle,
-    angle}) {
+    angle,
+    softWrap}) {
   List<Widget> list = [];
   for (var i = 0; i < columnCount; i++) {
     Widget child = Expanded(
@@ -66,7 +68,12 @@ List<Widget> buildItem(
           child: Transform.rotate(
             angle: angle ?? (-pi / 12),
             child: text != null
-                ? Text(text, textAlign: textAlign, style: textStyle)
+                ? Text(
+                    text,
+                    textAlign: textAlign,
+                    style: textStyle,
+                    softWrap: false, //默认不换行
+                  )
                 : widget ?? const SizedBox(),
           ),
           onChange: (size) {
