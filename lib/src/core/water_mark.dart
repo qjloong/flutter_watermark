@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Overlay, OverlayEntry, OverlayState;
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../widget/measure_widget_size.dart';
 import 'watermark_manager.dart';

@@ -11,6 +11,7 @@ class WaterMark extends StatefulWidget {
     this.movingOnWindowChange = true,
     Color? backgroundColor,
     this.textAlign,
+    this.locale,
     this.handleTouch = false,
   })  : backgroundColor = backgroundColor ?? _defaultBackgroundColor,
         super(key: key);
@@ -39,6 +40,9 @@ class WaterMark extends StatefulWidget {
 
   /// Default textAlign of [showWaterMark].
   final TextAlign? textAlign;
+
+  /// Default textAlign of [showWaterMark].
+  final Locale? locale;
 
   /// Whether toast can respond to click events.
   final bool handleTouch;
@@ -72,20 +76,43 @@ class _WaterMarkState extends State<WaterMark> {
       textDirection: widget.textDirection,
     );
 
-    final TextStyle textStyle = widget.textStyle ?? _defaultTextStyle;
+    final Typography typography = Typography.material2018(
+      platform: TargetPlatform.android,
+    );
+    final TextTheme defaultTextTheme = typography.white;
+
+    final TextStyle textStyle = widget.textStyle ??
+        defaultTextTheme.bodyText2?.copyWith(
+          fontSize: 15.0,
+          fontWeight: FontWeight.normal,
+          color: Colors.white,
+        ) ??
+        _defaultTextStyle;
+    ;
 
     final TextAlign textAlign = widget.textAlign ?? TextAlign.center;
 
-    return _WaterMarkTheme(
-      child: w,
-      backgroundColor: widget.backgroundColor,
-      radius: widget.radius,
-      textStyle: textStyle,
-      textAlign: textAlign,
-      dismissOtherOnShow: widget.dismissOtherOnShow,
-      movingOnWindowChange: widget.movingOnWindowChange,
-      textDirection: widget.textDirection,
-      handleTouch: widget.handleTouch,
+    return Localizations(
+      locale: widget.locale ?? const Locale('zh', 'CH'),
+      delegates: const <LocalizationsDelegate<dynamic>>[
+        GlobalWidgetsLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      child: MediaQuery(
+        data: const MediaQueryData(),
+        child: _WaterMarkTheme(
+          child: w,
+          backgroundColor: widget.backgroundColor,
+          radius: widget.radius,
+          textStyle: textStyle,
+          textAlign: textAlign,
+          dismissOtherOnShow: widget.dismissOtherOnShow,
+          movingOnWindowChange: widget.movingOnWindowChange,
+          textDirection: widget.textDirection,
+          handleTouch: widget.handleTouch,
+        ),
+      ),
     );
   }
 }
